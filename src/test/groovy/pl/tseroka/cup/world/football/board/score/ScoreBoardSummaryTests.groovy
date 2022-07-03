@@ -2,6 +2,8 @@ package pl.tseroka.cup.world.football.board.score
 
 import spock.lang.Specification
 
+import java.util.concurrent.TimeUnit
+
 class ScoreBoardSummaryTests extends Specification {
 
     def "getting games summary by total score test"() {
@@ -49,5 +51,7 @@ class ScoreBoardSummaryTests extends Specification {
                 .awayTeamScore(awayTeamScore)
             .build()
         )
+        // workaround to eliminate sometimes failing test in case when time difference between games starts is too short to be detected
+        TimeUnit.MILLISECONDS.sleep(50)
     }
 }
