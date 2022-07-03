@@ -2,6 +2,7 @@ package pl.tseroka.cup.world.football.board.score;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ScoreBoard {
 
@@ -35,7 +36,22 @@ public class ScoreBoard {
     }
 
     public FootballGame updateGame(FootballGameUpdateCommand gameUpdate) {
-        return null;
+        var game = getGame(
+            gameUpdate.getHomeTeam(), gameUpdate.getAwayTeam()
+        );
+        game.updateScore(
+            gameUpdate.getHomeTeamScore(),
+            gameUpdate.getAwayTeamScore()
+        );
+        return game;
+    }
+
+    private FootballGame getGame(FootballTeam homeTeam, FootballTeam awayTeam) {
+        return games.stream().filter(
+            game -> game.getHomeTeam().equals(homeTeam) && game.getAwayTeam().equals(awayTeam)
+        ).findFirst().orElseThrow(() ->
+            new NoSuchElementException("Provided teams does not currently playing game with each other")
+        );
     }
 
     public void finishGame(FootballTeam homeTeam, FootballTeam awayTeam) {

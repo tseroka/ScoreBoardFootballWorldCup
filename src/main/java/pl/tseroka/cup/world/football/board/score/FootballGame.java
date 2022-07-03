@@ -5,16 +5,32 @@ public class FootballGame {
     static FootballGame start(FootballTeam homeTeam, FootballTeam awayTeam) {
         return new FootballGame(
             new TeamScore(homeTeam, 0),
-            new TeamScore(awayTeam, 0)
+            new TeamScore(awayTeam, 0),
+            GameStatus.STARTED
         );
     }
 
     private final TeamScore homeTeam;
     private final TeamScore awayTeam;
 
-    private FootballGame(TeamScore homeTeam, TeamScore awayTeam) {
+    private GameStatus status;
+
+    private FootballGame(TeamScore homeTeam, TeamScore awayTeam, GameStatus status) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.status = status;
+    }
+
+    void updateScore(int homeTeamScore, int awayTeamScore) {
+        if (isFinished()) {
+            throw new IllegalStateException("Cannot update score of finished game");
+        }
+        this.homeTeam.updateScore(homeTeamScore);
+        this.awayTeam.updateScore(awayTeamScore);
+    }
+
+    private boolean isFinished() {
+        return this.status == GameStatus.FINISHED;
     }
 
     public int calculateTotalScore() {

@@ -16,4 +16,11 @@ public final class TeamScore {
     public int getScore() {
         return this.score;
     }
+
+    void updateScore(int latestScore) {
+        if (latestScore < this.score) {
+            throw new IllegalArgumentException("Team score cannot be updated with lesser than current value");
+        }
+        this.score = latestScore;
+    }
 }
