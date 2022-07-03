@@ -68,6 +68,6 @@ public class ScoreBoard {
     }
 
     public ScoreBoardSummary getSummary() {
-        return null;
+        return new ScoreBoardSummary(games);
     }
 }
