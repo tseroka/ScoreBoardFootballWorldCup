@@ -54,7 +54,17 @@ public class ScoreBoard {
         );
     }
 
+    public void finishGame(FootballGame footballGame) {
+        finishGame(footballGame.getHomeTeam(), footballGame.getAwayTeam());
+    }
+
     public void finishGame(FootballTeam homeTeam, FootballTeam awayTeam) {
+        if (homeTeam == null || awayTeam == null) {
+            throw new IllegalArgumentException("Teams provided to finish game must not be null");
+        }
+        var game = getGame(homeTeam, awayTeam);
+        game.finishGame();
+        games.remove(game);
     }
 
     public ScoreBoardSummary getSummary() {

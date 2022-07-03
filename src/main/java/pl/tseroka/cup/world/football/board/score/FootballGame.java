@@ -33,6 +33,13 @@ public class FootballGame {
         return this.status == GameStatus.FINISHED;
     }
 
+    void finishGame() {
+        if (isFinished()) {
+            throw new IllegalStateException("Game was already finished");
+        }
+        this.status = GameStatus.FINISHED;
+    }
+
     public int calculateTotalScore() {
         return homeTeam.getScore() + awayTeam.getScore();
     }

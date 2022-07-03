@@ -76,7 +76,7 @@ class ScoreBoardTests extends Specification {
         def startedGame = scoreBoard.startNewGame(new FootballTeam("England"), new FootballTeam("Spain"))
 
         when: "England - Spain game finish without goals is requested"
-        scoreBoard.finishGame(new FootballTeam("England"), new FootballTeam("Spain"))
+        scoreBoard.finishGame(startedGame)
         and: "score update is requested"
         scoreBoard.updateGame(
             FootballGameUpdateCommand.builder()
