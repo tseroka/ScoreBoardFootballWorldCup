@@ -1,10 +1,18 @@
 package pl.tseroka.cup.world.football.board.score;
 
 public class FootballGame {
+
+    static FootballGame start(FootballTeam homeTeam, FootballTeam awayTeam) {
+        return new FootballGame(
+            new TeamScore(homeTeam, 0),
+            new TeamScore(awayTeam, 0)
+        );
+    }
+
     private final TeamScore homeTeam;
     private final TeamScore awayTeam;
 
-    public FootballGame(TeamScore homeTeam, TeamScore awayTeam) {
+    private FootballGame(TeamScore homeTeam, TeamScore awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
     }

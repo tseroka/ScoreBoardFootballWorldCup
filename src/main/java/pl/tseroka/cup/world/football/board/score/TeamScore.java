@@ -4,7 +4,7 @@ public final class TeamScore {
     private final FootballTeam team;
     private int score;
 
-    TeamScore(FootballTeam team, int score) {
+    public TeamScore(FootballTeam team, int score) {
         this.team = team;
         this.score = score;
     }
